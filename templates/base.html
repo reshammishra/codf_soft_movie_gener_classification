@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Movie Genre Finder{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('home') }}">Movie Genre Finder</a>
+    {% if session.get('username') %}
+      <nav>
+        <span class="hello">Hi, {{ session['username'] }}</span>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </nav>
+    {% endif %}
+  </header>
+
+  <main class="container">
+    <!-- Messages from Flask (errors, "account created", etc.) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p class="flash {{ category }}">{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>CodSoft Internship Project</footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

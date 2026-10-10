@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Movie Genre Finder{% endblock %}
+
+{% block content %}
+<h1>Movie Genre Finder</h1>
+<p class="subtitle">Enter a movie plot summary to see its most likely genres.</p>
+
+<section class="box">
+  <label for="plot">Movie plot summary</label>
+  <textarea id="plot" rows="8" maxlength="3000"
+            placeholder="Paste or type a plot summary (at least 5 words)..."></textarea>
+  <div class="counter"><span id="count">0</span> / 3000</div>
+  <button id="predict-btn" type="button">Predict Genre</button>
+  <p id="error" class="flash error hidden" role="alert"></p>
+</section>
+
+<section id="result" class="box result hidden" aria-live="polite">
+  <p class="label">Most likely genre</p>
+  <p id="main-genre" class="main-genre"></p>
+  <p class="label">Other likely genres</p>
+  <ul id="genre-list" class="genre-list"></ul>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
